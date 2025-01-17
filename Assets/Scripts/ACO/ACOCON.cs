@@ -38,9 +38,10 @@ public class ACOCON
      */
     private GameObject endNode;
 
-    public List<Connection> ACO(int IterationThreshold, int TotalNumAnts, GameObject[] WaypointNodes, List<Connection> Connections, GameObject StartNode, int MaxPathLength)
+    public List<Connection> ACO(int IterationThreshold, int TotalNumAnts, GameObject[] WaypointNodes, List<Connection> Connections, GameObject StartNode, GameObject endNode, int MaxPathLength)
     {
-        endNode = WaypointNodes[WaypointNodes.Length - 1];
+        this.endNode = endNode;
+        
         Debug.Log("End node " + endNode.name);
 
         if (StartNode == null)
@@ -159,7 +160,7 @@ public class ACOCON
         // Output connections and Pheromone to the log.
         LogAnts();
         LogRoute(StartNode, MaxPathLength, WaypointNodes, Connections);
-        LogConnections(Connections);
+     //   LogConnections(Connections);
 
         MyRoute = GenerateRoute(StartNode, MaxPathLength, Connections);
         return MyRoute;

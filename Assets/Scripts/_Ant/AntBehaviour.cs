@@ -1,15 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class ACOTester : MonoBehaviour
+public class AntBehaviour : MonoBehaviour
 {
     private int count = 0;
     public float speed;
-
-
-    private int stop = 0;
-    int current;
 
 
     // The ACO Controller.
@@ -29,7 +25,6 @@ public class ACOTester : MonoBehaviour
 
     // The Start node for any created route.
     public GameObject startNode;
-
     public List<GameObject> endNode;
     public int currentTarget;
 
@@ -57,7 +52,7 @@ public class ACOTester : MonoBehaviour
 
     // Array of waypoint map connections. Represents a path.
     List<Connection> aStarPath = new List<Connection>();
-    private bool haveToReturn = true;
+    [SerializeField] private bool haveToReturn = true;
 
 
     [SerializeField] private int packageCount = 3;
@@ -160,15 +155,15 @@ public class ACOTester : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Parcel"))
-        {
-            other.gameObject.SetActive(false);
-            // DropCount = DropCount - 1;
-            // ParcelDropText();
-        }
-    }
+    // public void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.gameObject.CompareTag("Parcel"))
+    //     {
+    //         other.gameObject.SetActive(false);
+    //         // DropCount = DropCount - 1;
+    //         // ParcelDropText();
+    //     }
+    // }
 
     // void ParcelDropText()
     // {
