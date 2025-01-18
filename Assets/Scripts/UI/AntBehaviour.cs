@@ -26,6 +26,7 @@ public class AntBehaviour : MonoBehaviour
 
     public GameObject startNode; // The Start node for any created route.
     public List<GameObject> endNode;
+    // public GameObject parkNode; // Almost Near Start Node
 
     private GameObject toNode; // keep track of which node we are moving 
     private GameObject fromNode; // keep track of  form which  node it is moving To toNode
@@ -106,18 +107,6 @@ public class AntBehaviour : MonoBehaviour
         if (MyRoute.Count <= 0)
             return;
 
-        // if (movingRight)
-        // {
-        //     Vector3 targetPosition = transform.position + Vector3.forward * 10;
-        //     transform.position = Vector3.MoveTowards(transform.position, targetPosition, 20 * Time.deltaTime);
-        // }
-        //
-        // if (movingLeft)
-        // {
-        //     Vector3 targetPosition = transform.position - Vector3.forward * 10;
-        //     transform.position = Vector3.MoveTowards(transform.position, targetPosition, 20 * Time.deltaTime);
-        // }
-
         if (count < MyRoute.Count)
         {
             fromNode = MyRoute[count].GetFromNode();
@@ -171,11 +160,7 @@ public class AntBehaviour : MonoBehaviour
 
                 forwardCheck.enabled = false;
                 haveToReturnUsingAStar = false;
-                GameObject destination = new GameObject();
-                destination.transform.SetParent(startNode.transform);
-                destination.transform.position += Vector3.forward * 3;
-
-                aStarPath = AStarManager.PathfindAStar(fromNode, destination);
+                aStarPath = AStarManager.PathfindAStar(fromNode, startNode);
 
                 MyRoute = aStarPath;
             }
