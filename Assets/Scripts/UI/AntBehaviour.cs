@@ -55,6 +55,7 @@ public class AntBehaviour : MonoBehaviour
     [SerializeField] private LayerMask whatIsAnt;
     [SerializeField] private Collider[] otherAnts;
 
+    private bool movingLeft, movingRight;
 
     private void Awake()
     {
@@ -106,7 +107,6 @@ public class AntBehaviour : MonoBehaviour
         if (MyRoute.Count <= 0)
             return;
 
-        HandleCollisionAvoidance();
 
         if (count < MyRoute.Count)
         {
@@ -115,12 +115,21 @@ public class AntBehaviour : MonoBehaviour
 
             if (transform.position != toNode.transform.position)
             {
+                HandleCollisionAvoidance();
+                
                 ui.UpdateTime(CalculateTime());
                 ui.UpdateDistance(CalculateDistance());
                 ui.UpdateSpeed(currentMoveSpeed);
 
-                transform.position = Vector3.MoveTowards(transform.position, toNode.transform.position, Time.deltaTime * currentMoveSpeed);
-                Vector3 relativePos = toNode.transform.position - transform.position;
+                Vector3 targetPosition = toNode.transform.position;
+
+                if (movingRight)
+                    targetPosition += Vector3.right * 10;
+                if (movingLeft)
+                    targetPosition -= Vector3.right * 10;
+
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * currentMoveSpeed);
+                Vector3 relativePos =targetPosition - transform.position;
                 Quaternion targetRotation = Quaternion.LookRotation(relativePos);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 5);
             }
@@ -135,6 +144,10 @@ public class AntBehaviour : MonoBehaviour
             if (parcelCount > 0)
             {
                 parcelCount--;
+
+                defaultMoveSpeed += defaultMoveSpeed * 0.1f;
+                currentMoveSpeed = defaultMoveSpeed;
+
                 ui.UpdateP_Count(parcelCount);
                 ui.ShowDeliveryText();
             }
@@ -231,16 +244,16 @@ public class AntBehaviour : MonoBehaviour
 
     private IEnumerator RightMove()
     {
-        toNode.transform.position += new Vector3(3, 0, 0);
+        movingRight = true;
         yield return new WaitForSeconds(2);
-        toNode.transform.position -= new Vector3(3, 0, 0);
+        movingRight = false;
     }
 
     private IEnumerator LeftMove()
     {
-        toNode.transform.position -= new Vector3(3, 0, 0);
+        movingLeft = true;
         yield return new WaitForSeconds(2);
-        toNode.transform.position += new Vector3(3, 0, 0);
+        movingLeft = false;
     }
 
     private void GeneratePath(GameObject _startNode, GameObject _endNode)
