@@ -10098,7 +10098,7 @@ Transform:
   m_GameObject: {fileID: 769886692}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11088,7 +11088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11138,14 +11138,6 @@ PrefabInstance:
       propertyPath: startNode
       value: 
       objectReference: {fileID: 143148162}
-    - target: {fileID: 7184577937594930519, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
-      propertyPath: defaultMoveSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7184577937594930519, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
-      propertyPath: Waypoints.Array.size
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 7184577937594930519, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
       propertyPath: endNode.Array.data[0]
       value: 
@@ -17385,7 +17377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17436,8 +17428,8 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 369007967}
     - target: {fileID: 1677453371423718986, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
-      propertyPath: Waypoints.Array.size
-      value: 20
+      propertyPath: defaultMoveSpeed
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1677453371423718986, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: endNode.Array.data[0]
@@ -19921,10 +19913,6 @@ PrefabInstance:
       propertyPath: startNode
       value: 
       objectReference: {fileID: 369007967}
-    - target: {fileID: 1128982138555626681, guid: b836817eff26a034bbd13884590ce648, type: 3}
-      propertyPath: Waypoints.Array.size
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 1128982138555626681, guid: b836817eff26a034bbd13884590ce648, type: 3}
       propertyPath: endNode.Array.data[0]
       value: 
