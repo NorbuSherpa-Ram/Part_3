@@ -120,8 +120,9 @@ public class AntBehaviour : MonoBehaviour
                 ui.UpdateSpeed(currentMoveSpeed);
 
                 transform.position = Vector3.MoveTowards(transform.position, toNode.transform.position, Time.deltaTime * currentMoveSpeed);
-                Vector3 relativePos = (toNode.transform.position) - transform.position;
-                transform.rotation = Quaternion.LookRotation(relativePos);
+                Vector3 relativePos = toNode.transform.position - transform.position;
+                Quaternion targetRotation = Quaternion.LookRotation(relativePos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 5);
             }
             else
             {
@@ -135,7 +136,7 @@ public class AntBehaviour : MonoBehaviour
             {
                 parcelCount--;
                 ui.UpdateP_Count(parcelCount);
-                Debug.Log("Decrease - 1 ");
+                ui.ShowDeliveryText();
             }
 
             currentTarget++;
@@ -228,8 +229,6 @@ public class AntBehaviour : MonoBehaviour
 
     private void GeneratePath(GameObject _startNode, GameObject _endNode)
     {
-        Debug.Log($"Generated Path for {this.name} from {startNode.name} to {_endNode.name}");
-
         MyRoute = MyACOCON.ACO(100, 5, Waypoints, Connections, _startNode, _endNode, MaxPathLength);
 
         if (MyRoute == null || MyRoute.Count == 0)
