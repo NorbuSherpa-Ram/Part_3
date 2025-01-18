@@ -38,11 +38,9 @@ public class ACOCON
      */
     private GameObject endNode;
 
-    public List<Connection> ACO(int IterationThreshold, int TotalNumAnts, GameObject[] WaypointNodes, List<Connection> Connections, GameObject StartNode, GameObject endNode, int MaxPathLength)
+    public List<Connection> ACO(int IterationThreshold, int TotalNumAnts, List<VisGraphWaypointManager> WaypointNodes, List<Connection> Connections, GameObject StartNode, GameObject endNode, int MaxPathLength)
     {
         this.endNode = endNode;
-        
-        Debug.Log("End node " + endNode.name);
 
         if (StartNode == null)
         {
@@ -66,14 +64,14 @@ public class ACOCON
                 Ant aAnt = new Ant();
 
                 // Randomly choose start node.
-                currentNode = WaypointNodes[Random.Range(0, WaypointNodes.Length)];
+                currentNode = WaypointNodes[Random.Range(0, WaypointNodes.Count)].gameObject;
                 aAnt.SetStartNode(currentNode);
 
                 VisitedNodes.Clear();
 
                 // Keep moving through the nodes until visited them all.
                 // Keep looping until the number of nodes visited equals the number of nodes.
-                while (VisitedNodes.Count < WaypointNodes.Length)
+                while (VisitedNodes.Count < WaypointNodes.Count)
                 {
                     // Get all connections from node.
                     List<Connection> ConnectionsFromNodeAndNotVisited = AllConnectionsFromNodeAndNotVisited(currentNode, Connections, VisitedNodes);
@@ -157,10 +155,10 @@ public class ACOCON
             }
         }
 
-        // Output connections and Pheromone to the log.
-        LogAnts();
-        LogRoute(StartNode, MaxPathLength, WaypointNodes, Connections);
-     //   LogConnections(Connections);
+        //TODO :: REMOVE THIS IF WANT TO SEE LOG OF WAY 
+        //LogAnts();
+        //LogRoute(StartNode, MaxPathLength, WaypointNodes, Connections);
+        //LogConnections(Connections);
 
         MyRoute = GenerateRoute(StartNode, MaxPathLength, Connections);
         return MyRoute;

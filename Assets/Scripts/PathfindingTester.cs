@@ -121,12 +121,12 @@ public class PathfindingTester : MonoBehaviour
             {
                 if (moveDirection > 0)
                 {
-                    currentTargetPos = ConnectionArray[currentTarget].ToNode.transform.position;
+                    currentTargetPos = ConnectionArray[currentTarget].GetToNode().transform.position;
                     currentSpeed = Mathf.Clamp(currentSpeed, startingSpeed, float.MaxValue);
                 }
                 else
                 {
-                    currentTargetPos = ConnectionArray[currentTarget].FromNode.transform.position;
+                    currentTargetPos = ConnectionArray[currentTarget].GetFromNode().transform.position;
                 }
 
                 currentTargetPos.y = transform.position.y;
@@ -217,13 +217,15 @@ public class PathfindingTester : MonoBehaviour
         }
     }
 
-    private Coroutine hideRoutine; 
+    private Coroutine hideRoutine;
+
     IEnumerator HideVericalInfo()
     {
         yield return new WaitForSeconds(1);
         vehicleInfo.HideInformationText();
-        hideRoutine = null; 
+        hideRoutine = null;
     }
+
     private void HandleWaypointStopping()
     {
         if (stopWaypoints.Contains(ConnectionArray[currentTarget].ToNode) &&
@@ -277,14 +279,14 @@ public class PathfindingTester : MonoBehaviour
 
     private void UpdateGUI()
     {
-        vehicleInfo.UpdateDistance(totalDistance.ToString("F2"));
-        vehicleInfo.UpdateSpeed(currentSpeed.ToString("F2"));
-        if (agentMove==true)
+        vehicleInfo.UpdateDistance(totalDistance);
+        vehicleInfo.UpdateSpeed(currentSpeed);
+        if (agentMove == true)
         {
-            vehicleInfo.UpdateTime((Time.time - taskStartTime).ToString("F2"));
+            vehicleInfo.UpdateTime((Time.time - taskStartTime));
         }
 
-        vehicleInfo.UpdateP_Couunt(itemsRemaining.ToString());
+        vehicleInfo.UpdateP_Count(itemsRemaining);
     }
 
     private void OnDrawGizmos()

@@ -18,7 +18,7 @@ public class VisGraphWaypointManager : MonoBehaviour
     [SerializeField] private waypointTextColour WaypointTextColour = waypointTextColour.Blue;
 #pragma warning restore
 // List of all connections from this node.
-    [SerializeField] public List<VisGraphConnection> connections = new List<VisGraphConnection>();
+    [SerializeField] private List<VisGraphConnection> connections = new List<VisGraphConnection>();
 
     public List<VisGraphConnection> Connections
     {

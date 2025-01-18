@@ -15,24 +15,24 @@ public class VehicleInfo_UI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemDeliveryTmp;
     [SerializeField] private TextMeshProUGUI infoTmp;
 
-    public void UpdateDistance(string _distance)
+    public void UpdateDistance(float _distance)
     {
-        distance.text = "Distance : " + _distance;
+        distance.text = "Distance : " + _distance.ToString("F2");
     }
 
-    public void UpdateSpeed(string _speed)
+    public void UpdateSpeed(float _speed)
     {
-        speed.text = "Speed : " + _speed;
+        speed.text = "Speed : " + _speed.ToString("F2");
     }
 
-    public void UpdateTime(string _time)
+    public void UpdateTime(float _time)
     {
-        time.text = "Time : " + _time;
+        time.text = "Time : " + _time.ToString("F2");
     }
 
-    public void UpdateP_Couunt(string _pCount)
+    public void UpdateP_Count(int _pCount)
     {
-        p_Count.text = "Count : " + _pCount;
+        p_Count.text = "Count : " + _pCount.ToString();
     }
 
 
@@ -41,10 +41,9 @@ public class VehicleInfo_UI : MonoBehaviour
     public void UpdateInformation(string _info)
     {
         infoTmp.text = _info;
-        
     }
 
-    public void  HideInformationText()
+    public void HideInformationText()
     {
         infoTmp.text = "";
     }
