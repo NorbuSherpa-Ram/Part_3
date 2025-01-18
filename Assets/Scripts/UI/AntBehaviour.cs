@@ -37,7 +37,7 @@ public class AntBehaviour : MonoBehaviour
 
     [Space(10)] private AStarManager AStarManager = new AStarManager(); // The A* manager.
     private List<Connection> aStarPath = new List<Connection>(); // Array of waypoint map connections. Represents a path.
- private bool haveToReturnUsingAStar = true;
+    private bool haveToReturnUsingAStar = true;
 
 
     private float startTime;
@@ -148,8 +148,10 @@ public class AntBehaviour : MonoBehaviour
             {
                 if (!haveToReturnUsingAStar) return;
 
+                forwardCheck.enabled = false;
                 haveToReturnUsingAStar = false;
                 aStarPath = AStarManager.PathfindAStar(fromNode, startNode);
+
                 MyRoute = aStarPath;
             }
         }
@@ -216,16 +218,30 @@ public class AntBehaviour : MonoBehaviour
     }
 
 
-    public void MoveRight()
+    private void MoveRight()
     {
-        Debug.Log("Moved Right  " + this.name);
+        StartCoroutine(RightMove());
     }
 
-    public void MoveLeft()
+    private void MoveLeft()
     {
-        Debug.Log("Moved Left  " + this.name);
+        StartCoroutine(LeftMove());
     }
 
+
+    private IEnumerator RightMove()
+    {
+        toNode.transform.position += new Vector3(3, 0, 0);
+        yield return new WaitForSeconds(2);
+        toNode.transform.position -= new Vector3(3, 0, 0);
+    }
+
+    private IEnumerator LeftMove()
+    {
+        toNode.transform.position -= new Vector3(3, 0, 0);
+        yield return new WaitForSeconds(2);
+        toNode.transform.position += new Vector3(3, 0, 0);
+    }
 
     private void GeneratePath(GameObject _startNode, GameObject _endNode)
     {
