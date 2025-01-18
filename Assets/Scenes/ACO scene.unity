@@ -11134,6 +11134,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 334733113777448508, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
+      propertyPath: value
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309703713714691298, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5591148589676426290, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7184577937594930519, guid: 6fa2aa0a1d56aba4a8884471618de9e4, type: 3}
       propertyPath: ui
       value: 
@@ -17457,6 +17469,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 181682247994995725, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 181682247994995725, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 1677453371423718986, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: ui
       value: 
@@ -17565,6 +17585,14 @@ PrefabInstance:
       propertyPath: Waypoints.Array.data[19]
       value: 
       objectReference: {fileID: 249032809}
+    - target: {fileID: 1883189937918378279, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3813841590547737915, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
+      propertyPath: value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8535820447892641234, guid: d20839e362efa3d4baa3d2ce1b4f2df4, type: 3}
       propertyPath: m_Mass
       value: 100
@@ -20018,6 +20046,10 @@ PrefabInstance:
       propertyPath: Waypoints.Array.data[19]
       value: 
       objectReference: {fileID: 249032809}
+    - target: {fileID: 3372496512482460815, guid: b836817eff26a034bbd13884590ce648, type: 3}
+      propertyPath: value
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 4662373276992414848, guid: b836817eff26a034bbd13884590ce648, type: 3}
       propertyPath: m_Mass
       value: 100
@@ -20045,6 +20077,14 @@ PrefabInstance:
     - target: {fileID: 4662373276992414848, guid: b836817eff26a034bbd13884590ce648, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602399906393492392, guid: b836817eff26a034bbd13884590ce648, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6237042245943041685, guid: b836817eff26a034bbd13884590ce648, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

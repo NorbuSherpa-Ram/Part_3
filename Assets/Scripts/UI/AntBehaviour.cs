@@ -22,7 +22,7 @@ public class AntBehaviour : MonoBehaviour
     private Vector3 OffSet = new Vector3(0, 0.5f, 0); // Debug line offset.
 
 
-    public int priority;
+    // public int priority;
 
     public GameObject startNode; // The Start node for any created route.
     public List<GameObject> endNode;
@@ -55,7 +55,6 @@ public class AntBehaviour : MonoBehaviour
     [SerializeField] private LayerMask whatIsAnt;
     [SerializeField] private Collider[] otherAnts;
 
-    private bool movingLeft, movingRight;
 
     private void Awake()
     {
@@ -107,29 +106,38 @@ public class AntBehaviour : MonoBehaviour
         if (MyRoute.Count <= 0)
             return;
 
+        // if (movingRight)
+        // {
+        //     Vector3 targetPosition = transform.position + Vector3.forward * 10;
+        //     transform.position = Vector3.MoveTowards(transform.position, targetPosition, 20 * Time.deltaTime);
+        // }
+        //
+        // if (movingLeft)
+        // {
+        //     Vector3 targetPosition = transform.position - Vector3.forward * 10;
+        //     transform.position = Vector3.MoveTowards(transform.position, targetPosition, 20 * Time.deltaTime);
+        // }
 
         if (count < MyRoute.Count)
         {
             fromNode = MyRoute[count].GetFromNode();
             toNode = MyRoute[count].GetToNode();
 
-            if (transform.position != toNode.transform.position)
+            // if (transform.position != toNode.transform.position)
+
+            //small number = Mathf.Epsilon
+            if (Vector2.Distance(transform.position, toNode.transform.position) >= .05f)
             {
                 HandleCollisionAvoidance();
-                
+
                 ui.UpdateTime(CalculateTime());
                 ui.UpdateDistance(CalculateDistance());
                 ui.UpdateSpeed(currentMoveSpeed);
 
                 Vector3 targetPosition = toNode.transform.position;
 
-                if (movingRight)
-                    targetPosition += Vector3.right * 10;
-                if (movingLeft)
-                    targetPosition -= Vector3.right * 10;
-
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * currentMoveSpeed);
-                Vector3 relativePos =targetPosition - transform.position;
+                Vector3 relativePos = targetPosition - transform.position;
                 Quaternion targetRotation = Quaternion.LookRotation(relativePos);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 5);
             }
@@ -163,7 +171,11 @@ public class AntBehaviour : MonoBehaviour
 
                 forwardCheck.enabled = false;
                 haveToReturnUsingAStar = false;
-                aStarPath = AStarManager.PathfindAStar(fromNode, startNode);
+                GameObject destination = new GameObject();
+                destination.transform.SetParent(startNode.transform);
+                destination.transform.position += Vector3.forward * 3;
+
+                aStarPath = AStarManager.PathfindAStar(fromNode, destination);
 
                 MyRoute = aStarPath;
             }
@@ -183,35 +195,13 @@ public class AntBehaviour : MonoBehaviour
                 continue;
 
             //IN RANGE AND FACING TO BACK OF OTHER 
-            if (forwardCheck.detected)
+            if (forwardCheck.anotherCarDetected)
             {
                 info += $"{this.name} Slowing Down  \n";
                 currentMoveSpeed = slowDownSpeed;
             }
             else
                 currentMoveSpeed = defaultMoveSpeed;
-
-
-            //IN RANGE AND BOTH FACING TO EACH OTHER 
-            if (forwardCheck.giveSide)
-            {
-                AntBehaviour otherAnt = ant.GetComponent<AntBehaviour>();
-                if (otherAnt)
-                {
-                    if (priority > otherAnt.priority)
-                    {
-                        MoveRight();
-                    }
-                    else
-                    {
-                        MoveLeft();
-                    }
-
-                    info += $"{this.name} Providing Path  \n";
-                }
-            }
-            //do slow if both have same direction to move 
-            //  give side if they are passing each other 
         }
 
         if (!string.IsNullOrEmpty(info) && hideRoutine == null)
@@ -231,29 +221,16 @@ public class AntBehaviour : MonoBehaviour
     }
 
 
-    private void MoveRight()
+    public void MoveRight()
     {
-        StartCoroutine(RightMove());
+        Debug.Log("Move Right");
+        transform.position += Vector3.forward * 5;
     }
 
-    private void MoveLeft()
+    public void MoveLeft()
     {
-        StartCoroutine(LeftMove());
-    }
-
-
-    private IEnumerator RightMove()
-    {
-        movingRight = true;
-        yield return new WaitForSeconds(2);
-        movingRight = false;
-    }
-
-    private IEnumerator LeftMove()
-    {
-        movingLeft = true;
-        yield return new WaitForSeconds(2);
-        movingLeft = false;
+        Debug.Log("Move Left ");
+        transform.position -= Vector3.forward * 5;
     }
 
     private void GeneratePath(GameObject _startNode, GameObject _endNode)
