@@ -36,8 +36,8 @@ public class AntBehaviour : MonoBehaviour
 
 
     [Space(10)] private AStarManager AStarManager = new AStarManager(); // The A* manager.
-    [SerializeField] List<Connection> aStarPath = new List<Connection>(); // Array of waypoint map connections. Represents a path.
-    [SerializeField] private bool haveToReturnUsingAStar = true;
+    private List<Connection> aStarPath = new List<Connection>(); // Array of waypoint map connections. Represents a path.
+ private bool haveToReturnUsingAStar = true;
 
 
     private float startTime;
